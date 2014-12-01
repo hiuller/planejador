@@ -1,0 +1,1 @@
+create table meta_data (version integer, month text)

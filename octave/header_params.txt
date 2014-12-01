@@ -1,0 +1,27 @@
+Perda de gusa,0.02700
+Rendimento Ac1,0.90700
+Rendimento Ac2,0.90500
+% Sucata Aciaria 1 - FP,0.12000
+% Sucata Aciaria 1 - Comum,0.17000
+% Sucata Aciaria 2 - HIC,0.14000
+% Sucata Aciaria 2 - DR,0.13000
+% Sucata Aciaria 2 - RH,0.16000
+% Sucata Aciaria 2 - FP,0.13000
+% Sucata Aciaria 2 - Comum,0.18000
+Peso corrida Aciaria 1 - FP,74.00000
+Peso corrida Aciaria 1 - Comum,76.00000
+Peso corrida Aciaria 1 - Transferência,71.00000
+Peso corrida Aciaria 2 - HIC,163.00000
+Peso corrida Aciaria 2 - DR,164.00000
+Peso corrida Aciaria 2 - RH,165.00000
+Peso corrida Aciaria 2 - FP,166.00000
+Peso corrida Aciaria 2 - Comum,167.00000
+Produtividade Aciaria 1 - FP,44.00000
+Produtividade Aciaria 1 - Comum,46.00000
+Saldo de gusa inicial,1500.00000
+Pode reduzir sucata?,1.00000
+Fixar restritivos nos decêndios,1.00000
+Produção diária padrão AF1,1800.00000
+Produção diária padrão AF2,1800.00000
+Produção diária padrão AF3,6800.00000
+Número de corridas transferência,20.00000

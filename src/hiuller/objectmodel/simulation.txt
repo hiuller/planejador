@@ -1,0 +1,6 @@
+Simulation loop
+===============
+
+	1. schedule steel shop 1
+		1.a check is daily availability
+		1.b

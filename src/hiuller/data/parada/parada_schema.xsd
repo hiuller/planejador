@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/parada_schema" xmlns:tns="http://www.example.org/parada_schema" elementFormDefault="qualified">
+
+    <complexType name="objeto">
+    	<sequence>
+    		<element name="equipamento" type="int"></element>
+    		<element name="dia" type="int"></element>
+    		<element name="hora" type="int"></element>
+    		<element name="minuto" type="int"></element>
+    		<element name="duracao" type="int"></element>
+    		<element name="fixa" type="int"></element>
+    		<element name="nota" type="string"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="colecao">
+    	<sequence>
+    		<element name="item_colecao" type="tns:objeto" maxOccurs="unbounded" minOccurs="0"></element>
+    	</sequence>
+    </complexType>
+
+    <element name="root_element" type="tns:colecao"></element>
+</schema>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="img"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="res/sqlite-jdbc-3.7.2.jar"/>
+	<classpathentry kind="lib" path="res/jgap-examples.jar"/>
+	<classpathentry kind="lib" path="res/jgap.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/C:/Users/Usiminas/workspace/Planejador%20Aciaria/res/doc/jgap_doc.zip!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="res/itextpdf-5.5.2.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/C:/Users/Usiminas/workspace/Planejador%20Aciaria/res/iText/itextpdf-5.5.2-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
