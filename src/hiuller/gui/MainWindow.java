@@ -48,6 +48,7 @@ import com.itextpdf.text.pdf.PdfContentByte;
 import com.itextpdf.text.pdf.PdfTemplate;
 import com.itextpdf.text.pdf.PdfWriter;
 
+// the journey starts here
 public class MainWindow extends JFrame
 {
 	private static final long serialVersionUID = 1L;
