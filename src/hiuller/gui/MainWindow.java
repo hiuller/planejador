@@ -114,7 +114,7 @@ public class MainWindow extends JFrame
 // all automation can be done here.
 		if(autoexec)
 		{
-			openFile("C:\\Users\\Usiminas\\Documents\\plano_limpo.pla");
+			openFile( (new File(".")).getAbsolutePath() + "\\temp_data\\plano_limpo.pla");
 			//calcular();			
 			//testar();
 			//showConsole();
@@ -133,7 +133,7 @@ public class MainWindow extends JFrame
 			Constants.setDate( c.getTime() );
 
 		// load paradas from local XML file
-			LeitoraParadasXML leitora = new LeitoraParadasXML("C:\\Users\\Usiminas\\Documents\\agosto_2014.xml");
+			LeitoraParadasXML leitora = new LeitoraParadasXML((new File(".")).getAbsolutePath() + "\\temp_data\\agosto_2014.xml");
 			plano.carregarParadas( leitora.parse() );
 			
 		// change some parameters
@@ -356,7 +356,7 @@ public class MainWindow extends JFrame
 	public void exportPDF()
 	{	
 		// FIXME create file chooser
-		String fileLocation = "C:\\teste.pdf";
+		String fileLocation = (new File(".")).getAbsolutePath() + "\\temp_data\\teste.pdf";
 		
 		File file = new File(fileLocation);
 		
@@ -410,19 +410,20 @@ public class MainWindow extends JFrame
 	public void exportar()
 	{
 	// write the plano table to disk
-		// FIXME create file chooser 
-		String filePath = "c:\\plano.csv";		
+		// FIXME create file chooser
+		String dir = (new File(".")).getAbsolutePath();
+		String filePath = dir + "\\temp_data\\plano.csv";		
 		String header = Plano.FIELD_LIST + '\n';
 		Iterator<String> values = plano.getCSViterator();		
 		writeIterator2file(filePath, header, values);
 	// write parameters to disk
-		String paramPath = "c:\\params.csv";		
+		String paramPath = dir + "\\temp_data\\params.csv";		
 		String paramHeader = "parametro,valor\n";
 		Iterator<String> params = editorParametros.getCSVIterator();		
 		writeIterator2file(paramPath, paramHeader, params);
 	// write availability matrix
 	//{indice_ld, indice_ob, indice_fp, indice_rh, indice_ml};
-		String aPath = "c:\\availability.csv";		
+		String aPath = dir + "\\temp_data\\availability.csv";		
 		String aHeader = "\r";
 		Iterator<String> a = plano.getIteratorParadas();		
 		writeIterator2file(aPath, aHeader, a);

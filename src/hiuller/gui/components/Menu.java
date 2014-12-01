@@ -162,6 +162,7 @@ public class Menu extends JMenuBar implements ActionListener
 		if( e.getSource() == abrir )
 		{
 			JFileChooser chooser = new JFileChooser();
+			chooser.setCurrentDirectory( new File(".\\temp_data") );
 			FileFilter filtro = new FileFilter()
 			{
 				
@@ -200,6 +201,7 @@ public class Menu extends JMenuBar implements ActionListener
 			//       so I will always prompt the user for a file location
 			
 			JFileChooser chooser = new JFileChooser();
+			chooser.setCurrentDirectory( new File(".\\temp_data") );
 			FileFilter filtro = new FileFilter()
 			{
 				

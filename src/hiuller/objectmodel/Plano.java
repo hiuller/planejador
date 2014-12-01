@@ -1290,7 +1290,7 @@ repaint();
 			
 		return result.iterator();
 	}
-	
+	// this comment is useless
 	public Iterator<String> getIteratorParadas()
 	{
 		double[][] disp = computeAvailabilityMatrix(false);

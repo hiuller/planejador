@@ -5,6 +5,7 @@ import hiuller.data.parada.LeitoraParadasXML;
 import hiuller.objectmodel.Parada;
 import hiuller.objectmodel.Equipamentos.Equip;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class LeitoraEscritoraParadasXMLTest
@@ -13,8 +14,8 @@ public class LeitoraEscritoraParadasXMLTest
 	public static void main(String[] args)
 	{
 		
-		String location = "C:\\Users\\Usiminas\\workspace\\Planejador Aciaria\\src\\hiuller\\data\\parada\\teste.xml";
-		String destination = "C:\\saida.xml";
+		String location = (new File(".")).getAbsolutePath() + "\\src\\hiuller\\data\\parada\\teste.xml";
+		String destination = (new File(".")).getAbsolutePath() + "\\temp_data\\saida.xml";
 
 		LeitoraParadasXML leitora = new LeitoraParadasXML(location);
 		ArrayList<Parada> lista = leitora.parse();
