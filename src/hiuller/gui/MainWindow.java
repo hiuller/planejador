@@ -8,7 +8,6 @@ import hiuller.gui.dialogs.InserirDemanda;
 import hiuller.gui.dialogs.InserirParada;
 import hiuller.gui.dialogs.ListaParadas;
 import hiuller.gui.dialogs.MonthPicker;
-import hiuller.gui.utils.PlanoFitness;
 import hiuller.objectmodel.Plano;
 
 import java.awt.BorderLayout;
@@ -29,17 +28,7 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.ProgressMonitor;
 import javax.swing.UIManager;
-
-import org.jgap.Chromosome;
-import org.jgap.Configuration;
-import org.jgap.FitnessFunction;
-import org.jgap.Gene;
-import org.jgap.Genotype;
-import org.jgap.IChromosome;
-import org.jgap.impl.DefaultConfiguration;
-import org.jgap.impl.IntegerGene;
 
 import com.itextpdf.awt.PdfGraphics2D;
 import com.itextpdf.text.Document;
@@ -81,7 +70,7 @@ public class MainWindow extends JFrame
 	private EditorParametros editorParametros;	
 	private Console console = new Console();
 	
-	private boolean autoexec = false;
+	private boolean autoexec = true;
 		
 	public MainWindow()
 	{
@@ -115,7 +104,7 @@ public class MainWindow extends JFrame
 // all automation can be done here.
 		if(autoexec)
 		{
-			openFile( (new File(".")).getAbsolutePath() + "\\temp_data\\plano_limpo.pla");
+			openFile( (new File(".")).getAbsolutePath() + "\\temp_data\\out3.pla");
 			//calcular();			
 			//testar();
 			//showConsole();
@@ -219,6 +208,7 @@ public class MainWindow extends JFrame
 	
 	public void evolve() throws Exception
 	{
+/* comentado para implantação do PBR		
 		// the optimization loop goes in here
 		
 		//showConsole();
@@ -284,7 +274,12 @@ public class MainWindow extends JFrame
 				
 				IChromosome best = population.getFittestChromosome();
 				((PlanoFitness) fitness).send(best);
-				
+*/				
+		
+		// TODO verificar entradas
+		
+		// TODO categorizacao dos dias. dados crus na saida 'availability.csv'.
+		
 	}
 	
 	public EditorParametros getParametros()
@@ -305,7 +300,7 @@ public class MainWindow extends JFrame
 	public void listarParadas()
 	{
 		if(plano == null)
-			JOptionPane.showMessageDialog(null, "Plano is null, caboclo!");
+			JOptionPane.showMessageDialog(null, "Plano is null!");
 		else 
 		{
 			new ListaParadas(plano);
@@ -425,7 +420,7 @@ public class MainWindow extends JFrame
 	// write availability matrix
 	//{indice_ld, indice_ob, indice_fp, indice_rh, indice_ml};
 		String aPath = dir + "\\temp_data\\availability.csv";		
-		String aHeader = "\r";
+		String aHeader = "indice_ld, indice_ob, indice_fp, indice_rh, indice_ml, indice_ld1, indice_fp1, indice_ml4\n";
 		Iterator<String> a = plano.getIteratorParadas();		
 		writeIterator2file(aPath, aHeader, a);
 	}

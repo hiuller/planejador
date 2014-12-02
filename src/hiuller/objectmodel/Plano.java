@@ -1084,7 +1084,7 @@ repaint();
 		if(!hasData)
 			return null;
 		
-		double[][] availability = new double[numDias][5];
+		double[][] availability = new double[numDias][5+3]; //5-Aciaria 2 + 3-Aciaria 1
 		
 	Constants.mainWindowHandle.print2Console("Inicio de unidade teste");
 	
@@ -1115,16 +1115,31 @@ repaint();
 
 			if(parada_ac < indice_ml)
 				indice_ml = parada_ac;										
+// aciaria 1
+			double parada_ac1  = indiceFuncionamentoDia(Equip.ACIARIA_1, i+1);
+			double indice_ld1  = indiceFuncionamentoDia(Equip.CONV_AC1,  i+1);
+			double indice_fp1  = indiceFuncionamentoDia(Equip.FP1,       i+1);
+			double indice_ml4  = indiceFuncionamentoDia(Equip.MLC4,      i+1);
 
+			if(parada_ac1 < indice_ld1)
+				indice_ld1 = parada_ac1;										
+
+			if(parada_ac1 < indice_fp1)
+				indice_fp1 = parada_ac1;										
+
+			if(parada_ac1 < indice_ml4)
+				indice_ml4 = parada_ac;										
+// final aciaria 1
+			
 			if(verbose)
 			{
 				String result = String.format("dia %2d LD=%.4f  OB=%.4f  FP=%.4f  RH=%.4f  ML=%.4f", i+1, 
 						indice_ld, indice_ob, indice_fp, indice_rh, indice_ml);
-				
+				// esta saída não está exibindo indices da aciaria 1
 				Constants.mainWindowHandle.print2Console(result);
 			}
 			
-			availability[i] = new double[]{indice_ld, indice_ob, indice_fp, indice_rh, indice_ml};
+			availability[i] = new double[]{indice_ld, indice_ob, indice_fp, indice_rh, indice_ml, indice_ld1, indice_fp1, indice_ml4};
 		}
 	
 		return availability;
@@ -1184,8 +1199,7 @@ repaint();
 
 	public void runTest()
 	{
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub		
 	}
 	
 	private void setFitness(double value)
@@ -1298,12 +1312,15 @@ repaint();
 		
 		ArrayList<String> list = new ArrayList<String>();
 		for(int i=0; i<numDias; i++)
-			list.add( String.format("%s,%s,%s,%s,%s\n", 
+			list.add( String.format("%s,%s,%s,%s,%s,%s,%s,%s\n", 
 					Utils.strDouble(disp[i][0]), 
 					Utils.strDouble(disp[i][1]), 
 					Utils.strDouble(disp[i][2]), 
-					Utils.strDouble(disp[i][3]), 
-					Utils.strDouble(disp[i][4]) ) );
+					Utils.strDouble(disp[i][3]),
+					Utils.strDouble(disp[i][4]), 
+					Utils.strDouble(disp[i][5]), 
+					Utils.strDouble(disp[i][6]), 
+					Utils.strDouble(disp[i][7]) ) );
 		
 		return list.iterator();
 	}

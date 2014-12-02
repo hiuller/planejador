@@ -122,7 +122,8 @@ public class Menu extends JMenuBar implements ActionListener
 		abrir    =initializeItem ( "Abrir...", 'A', "CA");
 		salvar   =initializeItem ( "Salvar...", 'V', null);
 		bloquear =initializeItem ( "Proteger...", 'P', null);
-		exportar =initializeItem ( "Exportar para Excel...", 'X', null);
+		// FIXME exportar =initializeItem ( "Exportar para Excel...", 'X', null);
+		exportar =initializeItem ( "Exportar dados crus para temp_data", 'X', null);
 		pdf      =initializeItem ( "Criar PDF...", 'f', null);
 		sair     =initializeItem ( "Sair",  'S', "AX");		
 		initialize( arquivo, "Arquivo", 'A', new JComponent[]{novo, abrir, salvar, bloquear, new JSeparator(), exportar, pdf, new JSeparator(), sair} );
