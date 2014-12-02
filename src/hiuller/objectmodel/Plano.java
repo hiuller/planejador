@@ -30,6 +30,8 @@ import javax.swing.event.TableModelListener;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableModel;
 
+import com.hiuller.pbr.ClasseDia;
+
 public class Plano extends JPanel
 {
 	public static final String 
@@ -1199,7 +1201,8 @@ repaint();
 
 	public void runTest()
 	{
-		// TODO Auto-generated method stub		
+		ClasseDia cls = new ClasseDia(this);
+		cls.spit();
 	}
 	
 	private void setFitness(double value)
