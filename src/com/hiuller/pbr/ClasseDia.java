@@ -12,63 +12,89 @@ public class ClasseDia
 		campanha2	= 3,
 		ld1			= 4,
 		ld2         = 5,
-		parada1		= 6,
-		parada2		= 7,
-		paradaRH	= 8,
+		aciaria1	= 6,
+		aciaria2    = 7,
+		rh2			= 8,
 		inspecao1   = 9,
 		inspecao2   =10,
-		paradaMLC1  =11,
-		paradaMLC2  =12;
+		mlc1		=11,
+		mlc2        =12,
+		fp2         =13;
+	public static final int NUM_FAMILIAS = 14; 
 	
-	private int[] classificacao_ac2;
+	private int[] classificacao_ac2,
+				  classificacao_ac1,
+				  histograma_ac1,
+				  histograma_ac2;
 	
 	public ClasseDia(Plano plano)
 	{
 				
 		double[][] matriz = plano.computeAvailabilityMatrix(false);
 		int n = plano.getNumDias();		
+		classificacao_ac1 = new int[n];
 		classificacao_ac2 = new int[n];
+		histograma_ac1    = new int[NUM_FAMILIAS];
+		histograma_ac2    = new int[NUM_FAMILIAS];
 		
 		// using decision tree created by RapidMiner
 		for(int i=0; i<n; i++)
-		{			
-			classificacao_ac2[i] = decisionTreeAc2(matriz[i][0], matriz[i][1], matriz[i][2], matriz[i][3], matriz[i][4]);
+		{	
+			int classe_ac1 = decisionTreeAc1(matriz[i][5], matriz[i][6], matriz[i][7]);
+			classificacao_ac1[i] = classe_ac1;
+			histograma_ac1[classe_ac1]++;
+			
+			int classe_ac2 = decisionTreeAc2(matriz[i][0], matriz[i][1], matriz[i][2], matriz[i][3], matriz[i][4]);
+			classificacao_ac2[i] = classe_ac2;
+			histograma_ac2[classe_ac2]++;
 		}
 	}
 	
 	public void spit()
 	{
+
+		System.out.printf("\nAciaria 1\n");
+		for(int i=0; i<classificacao_ac2.length; i++)
+			System.out.printf("dia %02d = %d\n", i+1, classificacao_ac1[i]);
+		for(int i=0; i<NUM_FAMILIAS; i++)
+			System.out.printf("Família %02d count = %d\n", i, histograma_ac1[i]);
+		
+		
+		System.out.printf("Aciaria 2\n");
 		for(int i=0; i<classificacao_ac2.length; i++)
 			System.out.printf("dia %02d = %d\n", i+1, classificacao_ac2[i]);
+		for(int i=0; i<NUM_FAMILIAS; i++)
+			System.out.printf("Família %02d count = %d\n", i, histograma_ac2[i]);
+		
 	}
+	
 	
 	
 	private int decisionTreeAc2(double ld, double ob, double fp, double rh, double ml)
 	{
-		if(ld <= 0.167)
-			return parada2;
-		else
-			if(rh <= 0.583)
-				return paradaRH;
+		if(ld<=0.896)
+			  return aciaria2;
 			else
-				if(ld <= 0.5)
-					return ld2;
-				else
-					if(ld <= 0.833)
-						return parada2;
-					else
-						if(fp <= 0.5)
-							return paradaRH;
-						else
-							if(rh <= 0.833)
-								return paradaRH;
-							else
-								if(ml <= 0.521)
-									return inspecao2;
-								else
-									if(ml <= 0.771)
-										return paradaMLC2;
-									else
-										return normal2;
+			  if(rh<=0.833)
+			    return rh2;
+			  else
+			    if(fp<=0.5)
+			      return fp2;
+			    else
+			      if(ml<=0.521)
+			        return inspecao2;
+			      else
+			        if(ml<=0.771)
+			          return mlc2;
+			        else
+			          return normal2;
+	}
+	
+	private int decisionTreeAc1(double ld, double fp, double ml)
+	{
+		if(ld<=0.5)
+			return aciaria1;
+		else
+			return normal1;
 	}
 }
