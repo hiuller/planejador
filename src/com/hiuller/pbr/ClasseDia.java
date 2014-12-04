@@ -20,6 +20,22 @@ public class ClasseDia
 		mlc1		=11,
 		mlc2        =12,
 		fp2         =13;
+	public static final String[] labels = new String[]{
+		"Aciaria 1 normal",
+		"Aciaria 2 normal",
+		"Campanha na Aciaria 1",
+		"Campanha na Aciaria 2",
+		"Parada de LD na Aciaria 1",
+		"Parada de LD na Aciaria 2",
+		"Parada total Aciaria 1",
+		"Parada total Aciaria 2",
+		"RH parado",
+		"Inspecao MLC Aciaria 1",
+		"Inspecao MLC Aciaria 2",
+		"Parada de máquina na Aciaria 1",
+		"Parada de máquina na Aciaria 2",
+		"FP2 parado"
+	};
 	public static final int NUM_FAMILIAS = 14; 
 	
 	private int[] classificacao_ac2,
@@ -52,20 +68,23 @@ public class ClasseDia
 	
 	public void spit()
 	{
-
 		System.out.printf("\nAciaria 1\n");
-		for(int i=0; i<classificacao_ac2.length; i++)
-			System.out.printf("dia %02d = %d\n", i+1, classificacao_ac1[i]);
+		//for(int i=0; i<classificacao_ac2.length; i++)
+		//	System.out.printf("dia %02d = %d\n", i+1, classificacao_ac1[i]);
 		for(int i=0; i<NUM_FAMILIAS; i++)
-			System.out.printf("Família %02d count = %d\n", i, histograma_ac1[i]);
-		
+		{
+			if(histograma_ac1[i]>0)
+				System.out.printf("Família %02d count = %d (%s)\n", i, histograma_ac1[i], labels[i]);
+		}
 		
 		System.out.printf("Aciaria 2\n");
-		for(int i=0; i<classificacao_ac2.length; i++)
-			System.out.printf("dia %02d = %d\n", i+1, classificacao_ac2[i]);
+		//for(int i=0; i<classificacao_ac2.length; i++)
+		//	System.out.printf("dia %02d = %d\n", i+1, classificacao_ac2[i]);
 		for(int i=0; i<NUM_FAMILIAS; i++)
-			System.out.printf("Família %02d count = %d\n", i, histograma_ac2[i]);
-		
+		{
+			if(histograma_ac2[i]>0)
+				System.out.printf("Família %02d count = %d (%s)\n", i, histograma_ac2[i], labels[i]);
+		}					
 	}
 	
 	
