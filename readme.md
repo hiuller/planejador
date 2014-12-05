@@ -1,2 +1,2 @@
-## Hello world
-This is my first time in the land of markdown files.
+## Steelshop planner
+This project aims to address the problem of production planning for a oxigen LD steelshop.

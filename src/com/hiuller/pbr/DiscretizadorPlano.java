@@ -1,73 +1,29 @@
 package com.hiuller.pbr;
 
+import java.util.ArrayList;
+
 public class DiscretizadorPlano
 {
-	public static int calcNumCombinacoes(int demanda, int tetoDemanda, int numDias, int[] valores)
+	public static int calcNumCombinacoes(int demanda, int numDias, int[] base)
 	{
-		int numValores = valores.length;
-		
-		int count = 0;
+		int numValores = base.length; // numero de fatores, estou chamando isso de base
 
-		int[] x = new int[numValores];
-		for(int i=0; i<numValores; i++)
-			x[i] = 0;
-		
-		int[] histograma = new int[tetoDemanda+1];
-		for(int i=0; i<tetoDemanda+1; i++)
-			histograma[i]=0;
-			
-		// atualmente preciso de um loop para cada elemento no conjunto...
-/*		
-		for(int x0=0; x0<=numDias; x0++)
-			for(int x1=0; x1<=numDias; x1++)
-				for(int x2=0; x2<=numDias; x2++)
-					if(x0+x1+x2==numDias)
-					{
-						int producao = x0*valores[0]+x1*valores[1]+x2*valores[2];
-						if(producao==demanda) // exibir resultados para esta demanda
-						{
-							System.out.printf("%2d %2d %2d -> (%3d)\n", x0, x1, x2, producao);
-						}
-						histograma[producao]++;
-						count++;
-					}
-*/
-		// o tamanho da matriz é numDias^numValores, muito grande para inicializar um vetor?
-		// o caso limite atualmente é 31^6=887.503.681
-		for(int i=0; i<numValores; i++)		
-			for(x[i]=0; x[i]<=numDias; x[i]++)
-			{
-				int sum = 0;
-				for(int j=0; j<numValores; j++)
-					sum += x[j];
-				
-				if(sum == numDias)
-				{
-					int producao = 0;
-					for(int j=0; j<numValores; j++)
-						producao += x[j]*valores[j];
+		int[] x = new int[numValores];  // um vetor para as solucoes		
+		ArrayList<int[]> solucoes = new ArrayList<int[]>(); // uma lista para todas as soluções válidas, uma alternativa 
+															// seria retornar somente a primeira solução e fingir que só existe uma...;p
 					
-					if(producao==demanda)
-					{
-						histograma[producao]++;
-						count++;
-					}
-				}				
-			}
 
-		int num_solucoes = 0;
-		if(true)
-		{
-			for(int i=0; i<=tetoDemanda; i++)
-				if(histograma[i]!=0)
-				{
-					//System.out.printf("[%3d] = %d\n", i, histograma[i]);
-					num_solucoes++;
-				}
-		}
-		System.out.printf("O total de combinacoes e %d e o numero de solucoes e %d\n", count, num_solucoes);
 
-		return count;
+		return solucoes.size();
+	}
+	
+	// funcao recursiva de busca por solucoes (fatoracao sobre a base)
+	private boolean procure(int demanda, int numDias, int[] base)
+	{
+		//if(sum == demanda)
+			return true;
+		//else
+			//return procure(demanda, numDias, base)
 	}
 	
 	public static void main(String[] args)
@@ -87,8 +43,8 @@ public class DiscretizadorPlano
 		int tetoDemanda = 155;
 		int[] valores = new int[]{0, 4, 5};
 		
-		int numComb = calcNumCombinacoes(demanda, tetoDemanda, numDias, valores);
-		System.out.printf("Numero de combinações para fazer 31 corridas HIC com valores {0, 4, 5} = %d", numComb);
+		int numComb = calcNumCombinacoes(demanda, numDias, valores);
+		System.out.printf("Foi encontrada %d solução(ões) para a demanda 31 com base {0, 4, 5}\n", numComb);
 
 	}
 }
