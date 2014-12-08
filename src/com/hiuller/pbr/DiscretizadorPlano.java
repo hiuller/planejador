@@ -2,49 +2,115 @@ package com.hiuller.pbr;
 
 import java.util.ArrayList;
 
+
 public class DiscretizadorPlano
 {
-	public static int calcNumCombinacoes(int demanda, int numDias, int[] base)
+	
+	private int numCombinacoes, numSolucoes, demanda;
+	private int max;
+	private int[] base;
+	ArrayList<int[]> solucoes;
+	boolean verbose = false;
+	int[] histograma;
+	
+	public DiscretizadorPlano(int demanda, int numDias, int[] base)
 	{
-		int numValores = base.length; // numero de fatores, estou chamando isso de base
-
-		int[] x = new int[numValores];  // um vetor para as solucoes		
-		ArrayList<int[]> solucoes = new ArrayList<int[]>(); // uma lista para todas as soluções válidas, uma alternativa 
-															// seria retornar somente a primeira solução e fingir que só existe uma...;p
-					
-
-
-		return solucoes.size();
+		this.base = base;
+		this.max = numDias;
+		this.demanda = demanda;
+		
+		//compute results
+		solucoes = new ArrayList< int[] >();
+		histograma = new int[numDias];
+		listar(base.length, new int[base.length]);
 	}
 	
-	// funcao recursiva de busca por solucoes (fatoracao sobre a base)
-	private boolean procure(int demanda, int numDias, int[] base)
+	public void setVerbose(boolean verbose)
 	{
-		//if(sum == demanda)
-			return true;
-		//else
-			//return procure(demanda, numDias, base)
+		this.verbose = verbose;
 	}
 	
-	public static void main(String[] args)
+	public int getNumCombinacoes()
 	{
-	/*
-		int plano_fp1 = 133;
-		int[] vlr_discretos = new int[]{0, 5, 7};
-		
-		int numComb = calcNumCombinacoes(plano_fp1, vlr_discretos);
-		
-		System.out.printf("Numero de combinações para fazer 133 corridas com valores {0, 5, 7} = %d", numComb);
-	*/
-		// setup do problema
-		
-		int demanda = 31;
-		int numDias = 31;
-		int tetoDemanda = 155;
-		int[] valores = new int[]{0, 4, 5};
-		
-		int numComb = calcNumCombinacoes(demanda, numDias, valores);
-		System.out.printf("Foi encontrada %d solução(ões) para a demanda 31 com base {0, 4, 5}\n", numComb);
-
+		return numCombinacoes;
 	}
+	
+	public int getNumSolucoes()
+	{
+		return numSolucoes;
+	}
+	
+	public ArrayList<int[]> getSolucoes()
+	{
+		return solucoes;
+	}
+	
+	public void showHistograma()
+	{
+		for(int i=0; i<this.max; i++)
+			System.out.printf("dias > %02d > %d\n", i+1, histograma[i]);
+	}
+	
+	private int sum(int[] partial)
+	{
+		int result = 0;
+		for(int i=0; i<partial.length; i++)
+			result+=partial[i];
+		return result;
+	}
+	
+	public void print(int[] partial)
+	{
+		String format = "";
+		for(int i=0; i<partial.length; i++)
+			format += String.format("%02d-", partial[i]);
+		
+		format = format.substring(0, format.length()-1);
+		
+		System.out.println(format);
+	}
+	
+	private int product(int[] partial, int[] base)
+	{
+		int result = 0;
+		assert partial.length == base.length : "Dimensões diferentes entre o partial e a base.";
+		for(int i=0; i<base.length; i++)
+			result += partial[i]*base[i];
+		
+		return result;
+	}
+	
+	private int numDiasOperando(int[] partial)
+	{
+		int result = 0;
+		for(int i=0; i<base.length; i++)
+			result += base[i] > 0 ? partial[i] : 0;
+		
+		return result;
+	}
+	
+	private void listar(int level, int[] partial)
+	{
+		if(level==0)
+		{
+			numCombinacoes++;
+			if(sum(partial)==max)
+				if(product(partial, base)==demanda)
+				{
+					solucoes.add( partial.clone() );
+					histograma[numDiasOperando(partial.clone())-1]++;
+					if(verbose)
+						print(partial);
+					numSolucoes++;
+				}
+		}
+		else
+			for(int i=0; i<=max; i++)
+			{
+				int[] temp = partial;
+				temp[level-1] = i;
+				listar(level-1, temp);
+			}
+	}
+
 }
