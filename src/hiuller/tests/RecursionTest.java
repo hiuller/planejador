@@ -18,26 +18,25 @@ public class RecursionTest
 					}
 				}
 		
-		System.out.printf("The number of combinations si %d\n", counter);
+		System.out.printf("\nThe number of combinations si %d\n", counter);
 		
 		counter = 0;
-		listar(3, 31);
-		System.out.printf("The number of combinations si %d\n", counter);
+		listar(3, "");
+		System.out.printf("\nThe number of combinations si %d\n", counter);
 	}
 	
 	public static int counter;
+	public static final int max = 31;
 	
-	public static void listar(int level, int max)
+	public static void listar(int level, String partial)
 	{
-		counter++;
-		System.out.printf("level=%d; max=%02d\n", level, max);
-		if(level==0)
-			return;
+		if(level==0) {
+			System.out.printf(partial+'\n'); counter++; }
 		else
-			if(max==1)
-				listar(level-1, 32);
-			else
-				listar(level-0, max-1);				
+			for(int i=0; i<max; i++)
+			{
+				listar(level-1, String.format("%s-%d", partial, i));
+			}
 	}
 
 
