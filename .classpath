@@ -15,5 +15,6 @@
 			<attribute name="javadoc_location" value="jar:file:/C:/Users/Usiminas/workspace/Planejador%20Aciaria/res/iText/itextpdf-5.5.2-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="res/glpk-java.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
