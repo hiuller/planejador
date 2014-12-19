@@ -12,11 +12,8 @@ import hiuller.objectmodel.Plano;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics2D;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
@@ -29,13 +26,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
-
-import com.itextpdf.awt.PdfGraphics2D;
-import com.itextpdf.text.Document;
-import com.itextpdf.text.PageSize;
-import com.itextpdf.text.pdf.PdfContentByte;
-import com.itextpdf.text.pdf.PdfTemplate;
-import com.itextpdf.text.pdf.PdfWriter;
 
 // the journey starts here
 public class MainWindow extends JFrame
@@ -351,51 +341,7 @@ public class MainWindow extends JFrame
 	
 	public void exportPDF()
 	{	
-		// FIXME create file chooser
-		String fileLocation = (new File(".")).getAbsolutePath() + "\\temp_data\\teste.pdf";
-		
-		File file = new File(fileLocation);
-		
-		Document document = new Document(PageSize.A4.rotate());
-		try {
-			
-			PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(file));
-			document.open();
-			
-			PdfContentByte cb = writer.getDirectContent();
-			
-			float height = PageSize.A4.getHeight();
-			float width  = PageSize.A4.getWidth();
-						
-			PdfTemplate tp = cb.createTemplate(width, height);
-			Graphics2D g2 = new PdfGraphics2D(cb, width, width);			
-			
-			Dimension temp = plano.getScroll().getPreferredSize();
-			
-			plano.getScroll().setSize(temp);	
-	        plano.getScroll().addNotify();
-	        plano.getScroll().doLayout();
-	        plano.getScroll().validate();
-			
-			//g2.scale(1.8, 1.8);
-						
-			plano.getScroll().paintAll(g2);
-			//plano.printAll(g2);
-			
-			g2.dispose();
-			cb.addTemplate(tp, 0, 0);
-			
-			writer.setPageEmpty(false);
-			
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-		}
-		document.close();
-		
-		JOptionPane.showMessageDialog(null, String.format("Foi criado PDF <%s>", fileLocation));
-		
+		// FIXME create file chooser		
 	}
 
 	public void limpar()

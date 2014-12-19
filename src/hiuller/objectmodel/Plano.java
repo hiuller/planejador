@@ -565,14 +565,27 @@ public class Plano extends JPanel
 	public ArrayList<Parada> getParadas()
 	{
 		return paradas;
-	}		
+	}			
 	
-	
-	
-	
-	
-	
-	
+
+//               AAA                 QQQQQQQQQ     UUUUUUUU     UUUUUUUUIIIIIIIIII
+//              A:::A              QQ:::::::::QQ   U::::::U     U::::::UI::::::::I
+//             A:::::A           QQ:::::::::::::QQ U::::::U     U::::::UI::::::::I
+//            A:::::::A         Q:::::::QQQ:::::::QUU:::::U     U:::::UUII::::::II
+//           A:::::::::A        Q::::::O   Q::::::Q U:::::U     U:::::U   I::::I  
+//          A:::::A:::::A       Q:::::O     Q:::::Q U:::::D     D:::::U   I::::I  
+//         A:::::A A:::::A      Q:::::O     Q:::::Q U:::::D     D:::::U   I::::I  
+//        A:::::A   A:::::A     Q:::::O     Q:::::Q U:::::D     D:::::U   I::::I  
+//       A:::::A     A:::::A    Q:::::O     Q:::::Q U:::::D     D:::::U   I::::I  
+//      A:::::AAAAAAAAA:::::A   Q:::::O     Q:::::Q U:::::D     D:::::U   I::::I  
+//     A:::::::::::::::::::::A  Q:::::O  QQQQ:::::Q U:::::D     D:::::U   I::::I  
+//    A:::::AAAAAAAAAAAAA:::::A Q::::::O Q::::::::Q U::::::U   U::::::U   I::::I  
+//   A:::::A             A:::::AQ:::::::QQ::::::::Q U:::::::UUU:::::::U II::::::II
+//  A:::::A               A:::::AQQ::::::::::::::Q   UU:::::::::::::UU  I::::::::I
+// A:::::A                 A:::::A QQ:::::::::::Q      UU:::::::::UU    I::::::::I
+//AAAAAAA                   AAAAAAA  QQQQQQQQ::::QQ      UUUUUUUUU      IIIIIIIIII
+//                                           Q:::::Q                              
+//                                            QQQQQQ                              	
 // the hard core
 	public void calcular(boolean redoHotMetal)
 	{		
