@@ -91,6 +91,12 @@ public class DataConnection
 	public void close()
 	{
 		// close all open connections seems to be not needed
+		try{
+			connection.close();
+		}catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
 	}
 
 

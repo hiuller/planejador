@@ -568,24 +568,24 @@ public class Plano extends JPanel
 	}			
 	
 
-//               AAA                 QQQQQQQQQ     UUUUUUUU     UUUUUUUUIIIIIIIIII
-//              A:::A              QQ:::::::::QQ   U::::::U     U::::::UI::::::::I
-//             A:::::A           QQ:::::::::::::QQ U::::::U     U::::::UI::::::::I
-//            A:::::::A         Q:::::::QQQ:::::::QUU:::::U     U:::::UUII::::::II
-//           A:::::::::A        Q::::::O   Q::::::Q U:::::U     U:::::U   I::::I  
-//          A:::::A:::::A       Q:::::O     Q:::::Q U:::::D     D:::::U   I::::I  
-//         A:::::A A:::::A      Q:::::O     Q:::::Q U:::::D     D:::::U   I::::I  
-//        A:::::A   A:::::A     Q:::::O     Q:::::Q U:::::D     D:::::U   I::::I  
-//       A:::::A     A:::::A    Q:::::O     Q:::::Q U:::::D     D:::::U   I::::I  
-//      A:::::AAAAAAAAA:::::A   Q:::::O     Q:::::Q U:::::D     D:::::U   I::::I  
-//     A:::::::::::::::::::::A  Q:::::O  QQQQ:::::Q U:::::D     D:::::U   I::::I  
-//    A:::::AAAAAAAAAAAAA:::::A Q::::::O Q::::::::Q U::::::U   U::::::U   I::::I  
-//   A:::::A             A:::::AQ:::::::QQ::::::::Q U:::::::UUU:::::::U II::::::II
-//  A:::::A               A:::::AQQ::::::::::::::Q   UU:::::::::::::UU  I::::::::I
-// A:::::A                 A:::::A QQ:::::::::::Q      UU:::::::::UU    I::::::::I
-//AAAAAAA                   AAAAAAA  QQQQQQQQ::::QQ      UUUUUUUUU      IIIIIIIIII
-//                                           Q:::::Q                              
-//                                            QQQQQQ                              	
+//                AAA                 QQQQQQQQQ     UUUUUUUU     UUUUUUUUIIIIIIIIII
+//               A:::A              QQ:::::::::QQ   U::::::U     U::::::UI::::::::I
+//              A:::::A           QQ:::::::::::::QQ U::::::U     U::::::UI::::::::I
+//             A:::::::A         Q:::::::QQQ:::::::QUU:::::U     U:::::UUII::::::II
+//            A:::::::::A        Q::::::O   Q::::::Q U:::::U     U:::::U   I::::I  
+//           A:::::A:::::A       Q:::::O     Q:::::Q U:::::D     D:::::U   I::::I  
+//          A:::::A A:::::A      Q:::::O     Q:::::Q U:::::D     D:::::U   I::::I  
+//         A:::::A   A:::::A     Q:::::O     Q:::::Q U:::::D     D:::::U   I::::I  
+//        A:::::A     A:::::A    Q:::::O     Q:::::Q U:::::D     D:::::U   I::::I  
+//       A:::::AAAAAAAAA:::::A   Q:::::O     Q:::::Q U:::::D     D:::::U   I::::I  
+//      A:::::::::::::::::::::A  Q:::::O  QQQQ:::::Q U:::::D     D:::::U   I::::I  
+//     A:::::AAAAAAAAAAAAA:::::A Q::::::O Q::::::::Q U::::::U   U::::::U   I::::I  
+//    A:::::A             A:::::AQ:::::::QQ::::::::Q U:::::::UUU:::::::U II::::::II
+//   A:::::A               A:::::AQQ::::::::::::::Q   UU:::::::::::::UU  I::::::::I
+//  A:::::A                 A:::::A QQ:::::::::::Q      UU:::::::::UU    I::::::::I
+// AAAAAAA                   AAAAAAA  QQQQQQQQ::::QQ      UUUUUUUUU      IIIIIIIIII
+//                                            Q:::::Q                              
+//                                             QQQQQQ                              	
 // the hard core
 	public void calcular(boolean redoHotMetal)
 	{		
@@ -652,14 +652,14 @@ public class Plano extends JPanel
 			}
 	}
 		
-		this.corridas_ac2 = calculatCapacidadeAciaria2(false);		
+		boolean calcularCapacidadeVerbose = true;
+		this.corridas_ac2 = calcularCapacidadeAciaria2(calcularCapacidadeVerbose);		
 		
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////		
 //
 //   uma vez calculada a capacidade, iterar dia a dia olhando o saldo de gusa
 //		
-//
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////		
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////		
 		double perda_gusa = Constants.mainWindowHandle.getParametros().getParameter(EditorParametros.PERDA_GUSA);
 		
 // aciaria 1
@@ -735,9 +735,12 @@ public class Plano extends JPanel
 		// acerto do saldo de gusa
 			if(saldo_diario[i] < Constants.LIMITE_SALDO_BAIXO)
 			{
-				corridas_ac2[i]--;
-				i--;
-				continue;
+				if(corridas_ac2[i]>1)
+				{
+					corridas_ac2[i]--;
+					i--;
+					continue;
+				}
 			}
 			else
 				if(saldo_diario[i] > Constants.LIMITE_SALDO_ALTO)
@@ -811,6 +814,24 @@ repaint();
 		
 		if(redoHotMetal) repaint();
 	}
+	
+/////////////////////////////////////////////////////////////////////////////////////////
+//  
+//		FIM DO MÉTODO CALCULAR()
+//
+/////////////////////////////////////////////////////////////////////////////////////////	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	private void processarAlteracoes()
 	{
@@ -1184,7 +1205,7 @@ repaint();
 		 restr_fp2_total		= 0;
 	}
 
-	public int[] calculatCapacidadeAciaria2(boolean verbose)
+	public int[] calcularCapacidadeAciaria2(boolean verbose)
 	{		 
 		
 		double[][] aMatrix = computeAvailabilityMatrix(false);

@@ -8,6 +8,8 @@ import hiuller.gui.dialogs.InserirDemanda;
 import hiuller.gui.dialogs.InserirParada;
 import hiuller.gui.dialogs.ListaParadas;
 import hiuller.gui.dialogs.MonthPicker;
+import hiuller.gui.utils.SolutionProvider;
+import hiuller.gui.utils.TempData;
 import hiuller.objectmodel.Plano;
 
 import java.awt.BorderLayout;
@@ -59,9 +61,11 @@ public class MainWindow extends JFrame
 	private Menu menu;
 	private EditorParametros editorParametros;	
 	private Console console = new Console();
-	
+	//
 	private boolean autoexec = true;
-		
+	//
+	private String fileName = "";
+	
 	public MainWindow()
 	{
 		super(Constants.APP_TITLE);
@@ -178,6 +182,14 @@ public class MainWindow extends JFrame
 	
 	public void calcular()
 	{
+
+		SolutionProvider tempData = new TempData();
+		plano.setSolutionProvider(tempData);
+		
+		boolean refazerGusa = false;
+		plano.calcular(refazerGusa);
+		
+/* antiga chamada do método calcular que usava evolve()
 		Runnable runnable = new Runnable()
 		{
 			public void run()
@@ -194,6 +206,7 @@ public class MainWindow extends JFrame
 		
 		Thread t = new Thread(runnable);
 		t.start();
+*/		
 	}
 	
 	public void evolve() throws Exception
@@ -314,7 +327,7 @@ public class MainWindow extends JFrame
 		this.add(this.plano, BorderLayout.CENTER);
 		
 		menu.setOpen(true);
-		
+		fileName = location;
 		console.print(String.format("Abriu arquivo <%s>.", location));
 		
 		this.setVisible(true);
@@ -342,6 +355,7 @@ public class MainWindow extends JFrame
 	public void exportPDF()
 	{	
 		// FIXME create file chooser		
+		JOptionPane.showMessageDialog(null, "Esta função ainda não está disponível");
 	}
 
 	public void limpar()
@@ -410,6 +424,11 @@ public class MainWindow extends JFrame
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public String getCurrentFileName()
+	{
+		return fileName;
 	}
 
 }

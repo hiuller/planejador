@@ -115,6 +115,8 @@ public class BancoDeDados
 			System.exit(-1);
 		}
 		
+		connection.close();
+		
 	}
 // servicos de leitura	
 	public void openPersistenceFile()
@@ -265,6 +267,7 @@ public class BancoDeDados
 		}
 		
 // fim do processamento interno do arquivo de dados
+		connection.close();
 		
 		return plano;
 	}

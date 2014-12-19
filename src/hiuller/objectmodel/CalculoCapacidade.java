@@ -23,7 +23,7 @@ public class CalculoCapacidade
 	
 	public static int capacidade(int dr, int rh, int fp, double[] disp)
 	{
-		if(disp.length != 5)
+		if(disp.length != 8)
 			return -1;
 		
 		double h = Theta_zero;

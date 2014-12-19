@@ -197,43 +197,61 @@ public class Menu extends JMenuBar implements ActionListener
 		
 		if( e.getSource() == salvar )
 		{
-			// FIXME this file may be already linked to a disk location
-			//       I assume for now that this is always the first time
-			//       so I will always prompt the user for a file location
 			
-			JFileChooser chooser = new JFileChooser();
-			chooser.setCurrentDirectory( new File(".\\temp_data") );
-			FileFilter filtro = new FileFilter()
-			{
-				
-				@Override
-				public String getDescription()
-				{
-						return "Plano da Aciaria (*.pla)";
+			if(isOpen)
+			{ // in this case, we already have a file location and will just save changes to disk
+				final String location = owner.getCurrentFileName();
+				// delete current file
+				boolean result = new File(location).delete();
+				// write all again
+				if(result == true)
+				{	
+					Thread t = new Thread(new Runnable()
+					{
+						public void run()
+						{
+							owner.writeToFile(location);
+						}
+					});
+					t.start();	
 				}
-				
-				@Override
-				public boolean accept(File f)
+				else
+					JOptionPane.showMessageDialog(null, "Falha ao tentar salvar.");
+			} else {
+				JFileChooser chooser = new JFileChooser();
+				chooser.setCurrentDirectory( new File(".\\temp_data") );
+				FileFilter filtro = new FileFilter()
 				{
-					if (f.getAbsolutePath().endsWith(".pla"))
-						return true;
 					
-					return false;
-				}
-			};
-			chooser.setFileFilter(filtro);
-			
-			int result = chooser.showSaveDialog(null);
-			
-			if ( result == JFileChooser.APPROVE_OPTION )
-			{
-				String location = chooser.getSelectedFile().getAbsolutePath();
-				if(!location.endsWith(".pla"))
-					location += ".pla";
+					@Override
+					public String getDescription()
+					{
+						return "Plano da Aciaria (*.pla)";
+					}
+					
+					@Override
+					public boolean accept(File f)
+					{
+						if (f.getAbsolutePath().endsWith(".pla"))
+							return true;
+						
+						return false;
+					}
+				};
+				chooser.setFileFilter(filtro);
 				
-				owner.writeToFile(location);
+				int result = chooser.showSaveDialog(null);
 				
-			} // else let's ignore it
+				if ( result == JFileChooser.APPROVE_OPTION )
+				{
+					String location = chooser.getSelectedFile().getAbsolutePath();
+					if(!location.endsWith(".pla"))
+						location += ".pla";
+					
+					owner.writeToFile(location);
+					
+				} // else let's ignore it
+			}
 		}
 		
 		if( e.getSource() == sair )
